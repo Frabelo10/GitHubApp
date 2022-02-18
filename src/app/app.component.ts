@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   // MatPaginator Inputs
   pageNumber = 1;
   pageSize = 5;
+  total = 0;
 
   // MatPaginator Output
   pageEvent: PageEvent = new PageEvent();
@@ -19,7 +20,13 @@ export class AppComponent implements OnInit {
   }
 
   // Method to get current size number of pagination event
-  handleCurrentSize(pageNumber: number) {
-    this.pageNumber = pageNumber;
+  handleCurrentSize(total: number) {
+    this.total = total;
+  }
+
+  handlePageEvent(pageEvent: PageEvent) {
+    this.pageEvent = pageEvent;
+    this.pageNumber = pageEvent.pageIndex + 1;
+    this.pageSize = pageEvent.pageSize;
   }
 }

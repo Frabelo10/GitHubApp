@@ -1,10 +1,11 @@
 <div class="background">
   <div class="container">
     <div class="row">
-      <GitHubApp (totalResults)="this.handleCurrentSize($event)" [pageNumber]="this.pageNumber" [pageSize]="this.pageSize"></GitHubApp>
+      <GitHubApp (total)="this.handleCurrentSize($event)" [pageNumber]="this.pageNumber" [pageSize]="this.pageSize"></GitHubApp>
       <mat-paginator
-        [length]="this.pageNumber"
-        [pageSize]="this.pageSize">
+        [length]="this.total"
+        [pageSize]="this.pageSize"
+        (page)="this.handlePageEvent($event)">
       </mat-paginator>
     </div>
 

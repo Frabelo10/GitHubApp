@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { gitHubAppService } from '../../services/gitHub.service';
 import { gitHub } from '../../models/gitHubApp';
 import { Observable } from 'rxjs';
@@ -8,14 +15,13 @@ import { Observable } from 'rxjs';
   templateUrl: './GitHubApp.component.html',
   styleUrls: ['./GitHubApp.component.scss'],
 })
-export class GitHubApp implements OnInit {
+export class GitHubApp implements OnInit, OnChanges {
   repo = {} as gitHub;
   repos: gitHub[] | undefined;
 
-  @Input() pageNumber = 0;
-  @Input() pageSize = 0;
-  @Input() changed: Observable<boolean> = new Observable();
-  @Output() totalResults: EventEmitter<number> = new EventEmitter();
+  @Input() pageNumber = 1;
+  @Input() pageSize = 5;
+  @Output() total: EventEmitter<number> = new EventEmitter();
 
   constructor(private gitHubService: gitHubAppService) {}
 
@@ -24,11 +30,14 @@ export class GitHubApp implements OnInit {
     this.getRepos();
   }
 
+  ngOnChanges(): void {
+    this.ngOnInit();
+  }
+
   getTotalPage() {
     this.gitHubService.getRepos(0, 0).subscribe((repos: gitHub[]) => {
-      console.log(repos);
-      const totalRepo = repos.length;
-      this.totalResults.emit(totalRepo);
+      const total = repos.length;
+      this.total.emit(total);
     });
   }
 

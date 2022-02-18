@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "eslint --quiet -c .eslintrc.json --ext .ts ."
+    "lint": "eslint --quiet -c .eslintrc.json --ext .ts . --fix"
   },
   "husky": {
     "hooks": {

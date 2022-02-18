@@ -1,8 +1,16 @@
 <div class="item card" *ngFor="let repo of repos">
     <tr>
-    <td><img class="image" src="{{repo.owner.avatar_url}}"/></td>
-    <td><p>{{repo.owner.login}}</p></td>
-    <td><p class="box">{{repo.name}}</p></td>
-    <td><a href={{repo.html_url}}>Open repository</a></td>
+    <td>
+      <img class="image" src="{{repo.owner.avatar_url}}"/>
+    </td>
+    <td>
+      <p>{{repo.owner.login}}</p>
+    </td>
+    <td>
+      <p class="box">{{repo.name}}</p>
+    </td>
+    <td>
+      <a href={{repo.html_url}}>Open repository</a>
+    </td>
   </tr>
-  </div>
+</div>

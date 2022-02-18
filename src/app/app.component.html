@@ -1,12 +1,18 @@
 <div class="background">
   <div class="container">
     <div class="row">
-      <GitHubApp></GitHubApp>
-      <mat-paginator 
-              [length]="18"
-              [pageSize]="5"
-              aria-label="Select page">
+      <GitHubApp (totalResults)="this.handleCurrentSize($event)" [pageNumber]="this.pageNumber" [pageSize]="this.pageSize"></GitHubApp>
+      <mat-paginator
+        [length]="this.pageNumber"
+        [pageSize]="this.pageSize">
       </mat-paginator>
     </div>
-</div>
+
+    <div *ngIf="pageEvent">
+      <h5>Page Change Event Properties</h5>
+      <div>List length: {{pageEvent.length}}</div>
+      <div>Page size: {{pageEvent.pageSize}}</div>
+      <div>Page index: {{pageEvent.pageIndex}}</div>
+    </div>
   </div>
+</div>

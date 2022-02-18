@@ -21,9 +21,14 @@ export class gitHubAppService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  getRepos(): Observable<gitHub[]> {
+  getRepos(page?: number, size?: number): Observable<gitHub[]> {
+    if (page == 0 && size == 0) {
+      return this.httpClient
+        .get<gitHub[]>(this.url)
+        .pipe(retry(2), catchError(this.handleError));
+    }
     return this.httpClient
-      .get<gitHub[]>(this.url)
+      .get<gitHub[]>(`${this.url}?page=${page}&per_page=${size}`)
       .pipe(retry(2), catchError(this.handleError));
   }
 
